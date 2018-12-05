@@ -1,4 +1,5 @@
 FROM ac3agrtp/centos6-glusterfs:3.12
+LABEL maintainer="y-okubo"
 
 ENV CONFIGURE_OPTS --disable-install-doc
 
