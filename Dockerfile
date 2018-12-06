@@ -41,6 +41,7 @@ RUN rpm --import /rpm/RPM-GPG-KEY-nux.ro \
  readline-devel \
  redis \
  sqlite-devel \
+ sudo \
  wget \
  # Install ImageMagick
  && rpm -Uvh /rpm/remi-release-6.rpm \
