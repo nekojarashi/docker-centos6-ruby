@@ -15,6 +15,7 @@ RUN rpm --import /rpm/RPM-GPG-KEY-nux.ro \
  && yum install -y /rpm/mysql-community-release-el6-5.noarch.rpm \
  && yum install -y epel-release \
  && yum install -y \
+ cups \
  dtach \
  ffmpeg-devel \
  ffmpeg \
