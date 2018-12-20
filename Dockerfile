@@ -44,6 +44,9 @@ RUN rpm --import /rpm/RPM-GPG-KEY-nux.ro \
  sqlite-devel \
  sudo \
  wget \
+ # Prepare FFmpeg
+ && ln -s /usr/bin/ffmpeg /usr/local/bin \
+ && ln -s /usr/bin/ffprobe /usr/local/bin \
  # Install ImageMagick
  && rpm -Uvh /rpm/remi-release-6.rpm \
  && yum -y install --enablerepo=remi \
@@ -52,7 +55,20 @@ RUN rpm --import /rpm/RPM-GPG-KEY-nux.ro \
  # Install Ruby
  && yum install -y /rpm/ruby-2.3.3-1.el6.x86_64.rpm \
  && /usr/bin/gem install bundler foreman mailcatcher \
+ # Install LibreOffice
+ && wget -O /tmp/LibreOffice_4.4.3.2_Linux_x86-64_rpm.tar.gz https://downloadarchive.documentfoundation.org/libreoffice/old/4.4.3.2/rpm/x86_64/LibreOffice_4.4.3.2_Linux_x86-64_rpm.tar.gz \
+ && tar xvzf /tmp/LibreOffice_4.4.3.2_Linux_x86-64_rpm.tar.gz -C /tmp \
+ && yum -y localinstall /tmp/LibreOffice_4.4.3.2_Linux_x86-64_rpm/RPMS/*.rpm \
+ && rm -rf /tmp/LibreOffice_4.4.3.2_Linux_x86-64_rpm \
+ && rm -f /tmp/LibreOffice_4.4.3.2_Linux_x86-64_rpm.tar.gz \
+ && rm -f /usr/bin/libreoffice \
+ && ln -s /usr/bin/libreoffice4.4 /usr/bin/libreoffice \
  # Clean
  && rm -rf /rpm \
  && rm -rf /var/cache/yum/* \
- && yum clean all
+ && yum clean all \
+ # Install Yarn
+ && npm config set ca "" \
+ && npm install -g n \
+ && n 8.11.4 \
+ && npm install -g yarn
